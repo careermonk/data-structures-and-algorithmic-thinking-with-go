@@ -46,7 +46,7 @@ func merge(left, right []int) []int {
 func main() {
 	A := []int{3, 4, 5, 2, 1}
 	A = mergeSort(A)
-	fmt.Println("\n After Insertion Sorting")
+	fmt.Println("\n After merge sorting")
 	for _, val := range A {
 		fmt.Println(val)
 	}

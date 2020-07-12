@@ -13,13 +13,13 @@ package main
 import "fmt"
 
 // calculates factorial of a positive integer
-func fact(n int) int {
+func factorial(n int) int {
 	if n == 0 { // base cases: fact of 0
 		return 1
 	}
-	return n * fact(n-1)
+	return n * factorial(n-1)
 }
 
 func main() {
-	fmt.Println(fact(5))
+	fmt.Println(factorial(5))
 }

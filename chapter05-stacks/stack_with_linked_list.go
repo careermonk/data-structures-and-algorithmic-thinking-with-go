@@ -9,7 +9,6 @@
 // 				    merchantability or fitness for a particular purpose.
 
 package main
-
 import "fmt"
 
 type Stack struct {
@@ -42,6 +41,17 @@ func (s *Stack) pop() (data interface{}) {
 		return
 	}
 	return nil
+}
+
+// Return true if size of the stack is zero otherwise, false
+func (s *Stack) isEmpty() bool{
+	return s.size == 0
+}
+
+
+// Return false as it is a linked list implementation.
+func (s *Stack) isFull() bool{
+	return false
 }
 
 // Return the top element's data

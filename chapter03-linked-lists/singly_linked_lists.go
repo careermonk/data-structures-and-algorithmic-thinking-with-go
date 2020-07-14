@@ -59,14 +59,14 @@ func (ll *LinkedList) insert(i int, data interface{}) error {
 		return fmt.Errorf("Index out of bounds")
 	}
 	node := &ListNode{data, nil}
-	if i == 0 {
+	if i <= 1 {
 		node.next = ll.head
 		ll.head = node
 		return nil
 	}
 	current := ll.head
-	j := 0
-	for j < i-2 {
+	j := 1
+	for j < i-1 {
 		j++
 		current = current.next
 	}
@@ -159,7 +159,9 @@ func main() {
 	ll.insertAtBeginning("B")
 	fmt.Printf("insertAtEnd: C\n")
 	ll.insertAtEnd("C")
-
+	fmt.Printf("insert: D\n")
+	ll.insert(4, "D")
+	
 	fmt.Printf("length: %d\n", ll.length())
 
 	err := ll.display()

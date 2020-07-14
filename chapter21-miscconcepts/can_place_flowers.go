@@ -9,22 +9,24 @@
 // 				    merchantability or fitness for a particular purpose.
 
 package main
+
 import "fmt"
 
 func canPlaceFlowers(flowerbed []int, n int) bool {
-    lenF, count := len(flowerbed), 0
-    for i := range flowerbed{
-        if flowerbed[i] == 0 && (i == 0 || flowerbed[i-1] == 0) && (i == lenF - 1 || flowerbed[i+1] == 0){
-            flowerbed[i] = 1
-            count++
-        } 
-    }
-    return count >= n
+	lenF, count := len(flowerbed), 0
+	for p := range flowerbed {
+		if flowerbed[p] == 0 && (p == 0 || flowerbed[p-1] == 0) && (p == lenF-1 || flowerbed[p+1] == 0) {
+			flowerbed[p] = 1
+			count++
+		}
+	}
+
+	return count >= n
 }
 
 func main() {
-	fmt.Println(countSetBits(5))
-	fmt.Println(countSetBits(10))
-	fmt.Println(countSetBits(2))
-	fmt.Println(countSetBits(4))
+	fmt.Println(canPlaceFlowers([]int{1, 0, 0, 0, 1}, 5))
+	fmt.Println(canPlaceFlowers([]int{1, 0, 0, 0, 1}, 2))
+	fmt.Println(canPlaceFlowers([]int{1, 0, 0, 0, 1}, 1))
+	fmt.Println(canPlaceFlowers([]int{1, 0, 0, 0, 1}, 3))
 }

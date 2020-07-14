@@ -111,8 +111,6 @@ func (ll *LinkedList) deleteLast() (interface{}, error) {
 
 // delete removes an element at position i
 func (ll *LinkedList) delete(i int) (interface{}, error) {
-	k := 1
-	var q *ListNode
 	if ll.head == nil {
 		return nil, fmt.Errorf("deleteLast: List is empty")
 	}
@@ -120,9 +118,11 @@ func (ll *LinkedList) delete(i int) (interface{}, error) {
 
 	if i <= 1 { // from the beginning
 		ll.head = ll.head.next
+		ll.size--
 		return p.data, nil
 	}
-
+	k := 1
+	var q *ListNode
 	for (p != nil) && k < i { // traverse the list to the position from which we want to delete
 		k++
 		q = p
@@ -133,7 +133,7 @@ func (ll *LinkedList) delete(i int) (interface{}, error) {
 	}
 
 	q.next = p.next
-
+	ll.size--
 	return p.data, nil
 }
 

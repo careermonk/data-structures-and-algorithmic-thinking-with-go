@@ -76,18 +76,19 @@ func (ll *LinkedList) insert(i int, data interface{}) error {
 	return nil
 }
 
-func (ll *LinkedList) deleteFront() error {
+func (ll *LinkedList) deleteFront() (interface{}, error) {
 	if ll.head == nil {
-		return fmt.Errorf("deleteFront: List is empty")
+		return nil, fmt.Errorf("deleteFront: List is empty")
 	}
+	data := ll.head.data
 	ll.head = ll.head.next
 	ll.size--
-	return nil
+	return data, nil
 }
 
-func (ll *LinkedList) deleteLast() error {
+func (ll *LinkedList) deleteLast() (interface{}, error) {
 	if ll.head == nil {
-		return fmt.Errorf("deleteLast: List is empty")
+		return nil, fmt.Errorf("deleteLast: List is empty")
 	}
 	var prev *ListNode
 	current := ll.head
@@ -101,7 +102,7 @@ func (ll *LinkedList) deleteLast() error {
 		ll.head = nil
 	}
 	ll.size--
-	return nil
+	return current.data, nil
 }
 
 // delete removes an element at position i
@@ -167,7 +168,7 @@ func main() {
 	}
 
 	fmt.Printf("deleteFront\n")
-	err = ll.deleteFront()
+	_, err = ll.deleteFront()
 	if err != nil {
 		fmt.Printf("deleteFront Error: %s\n", err.Error())
 	}
@@ -178,7 +179,7 @@ func main() {
 	}
 
 	fmt.Printf("deleteLast\n")
-	err = ll.deleteLast()
+	_, err = ll.deleteLast()
 	if err != nil {
 		fmt.Printf("deleteLast Error: %s\n", err.Error())
 	}
@@ -189,7 +190,7 @@ func main() {
 	}
 
 	fmt.Printf("deleteLast\n")
-	err = ll.deleteLast()
+	_, err = ll.deleteLast()
 	if err != nil {
 		fmt.Printf("deleteLast Error: %s\n", err.Error())
 	}
@@ -200,7 +201,7 @@ func main() {
 	}
 
 	fmt.Printf("deleteLast\n")
-	err = ll.deleteLast()
+	_, err = ll.deleteLast()
 	if err != nil {
 		fmt.Printf("deleteLast Error: %s\n", err.Error())
 	}

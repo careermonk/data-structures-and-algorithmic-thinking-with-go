@@ -54,28 +54,31 @@ func (ll *LinkedList) insertAtEnd(data interface{}) {
 }
 
 // Insert adds an item at position i
-func (ll *LinkedList) insert(i int, data interface{}) error {
-	newNode := &ListNode{data, nil}
-	if i <= 0 {
-		newNode.next = ll.head
-		ll.head = newNode
-		ll.size++
-		return nil
-	}
-	prev := ll.head
-	// find the n-1th newNode (predecessor): decrement n and move down the list
-	for prev != nil {
-		i = i - 1
-		if i == 0 {
-			break
-		}
-		prev = prev.next // repoint temp to the next element
-	}
-	if prev == nil {
+func (ll *LinkedList) insert(position int, data interface{}) error {
+	// This condition to check whether the position given is valid or not.
+	if position < 1 || position > ll.size+1 {
 		return fmt.Errorf("insert: Index out of bounds")
 	}
-	newNode.next = prev.next
-	prev.next = newNode
+	newNode := &ListNode{data, nil}
+
+	var prev, current *ListNode
+	prev = nil
+	current = ll.head
+
+	for position > 1 {
+		prev = current
+		current = current.next
+		position = position - 1
+	}
+
+	if prev != nil {
+		prev.next = newNode
+		newNode.next = current
+	} else {
+		newNode.next = current
+		ll.head = newNode
+	}
+
 	ll.size++
 	return nil
 }
@@ -110,31 +113,33 @@ func (ll *LinkedList) deleteLast() (interface{}, error) {
 }
 
 // delete removes an element at position i
-func (ll *LinkedList) delete(i int) (interface{}, error) {
-	if ll.head == nil {
-		return nil, fmt.Errorf("deleteLast: List is empty")
+func (ll *LinkedList) delete(position int) (interface{}, error) {
+	// This condition to check whether the position given is valid or not.
+	if position < 1 || position > ll.size+1 {
+		return nil, fmt.Errorf("insert: Index out of bounds")
 	}
-	p := ll.head
+	// Complete this method
+	var prev, current *ListNode
+	prev = nil
+	current = ll.head
 
-	if i <= 1 { // from the beginning
+	pos := 0
+
+	if position == 1 {
 		ll.head = ll.head.next
-		ll.size--
-		return p.data, nil
-	}
-	k := 1
-	var q *ListNode
-	for (p != nil) && k < i { // traverse the list to the position from which we want to delete
-		k++
-		q = p
-		p = p.next
-	}
-	if p == nil { /* at the end */
-		return nil, fmt.Errorf("Index out of bounds")
-	}
+	} else {
+		for pos != position - 1  {
+			pos = pos + 1
+			prev = current
+			current = current.next
+		}
 
-	q.next = p.next
+		if current != nil {
+			prev.next = current.next
+		}
+	}
 	ll.size--
-	return p.data, nil
+	return current.data, nil
 }
 
 func (ll *LinkedList) display() error {
@@ -175,7 +180,7 @@ func main() {
 	fmt.Printf("insertAtEnd: C\n")
 	ll.insertAtEnd("C")
 	fmt.Printf("insert: D\n")
-	ll.insert(3, "D")
+	ll.insert(2, "D")
 	fmt.Printf("length: %d\n", ll.length())
 
 	err := ll.display()
@@ -184,7 +189,7 @@ func main() {
 	}
 
 	fmt.Printf("delete\n")
-	_, err = ll.delete(5)
+	_, err = ll.delete(4)
 	if err != nil {
 		fmt.Printf("deleteError: %s\n", err.Error())
 	}

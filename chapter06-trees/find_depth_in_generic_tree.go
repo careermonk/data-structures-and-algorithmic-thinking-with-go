@@ -12,13 +12,6 @@ package main
 
 import "fmt"
 
-func max(x int, y int) int {
-	if x > y {
-		return x
-	}
-	return y
-}
-
 // function to find the height of tree
 func findHeight(P []int, n int) int {
 	var maxDepth int
@@ -29,7 +22,9 @@ func findHeight(P []int, n int) int {
 			currentDepth++
 			j = P[j]
 		}
-		maxDepth = max(maxDepth, currentDepth)
+		if currentDepth > maxDepth {
+			maxDepth = currentDepth
+		}
 	}
 	return maxDepth
 }

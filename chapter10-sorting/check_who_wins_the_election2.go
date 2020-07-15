@@ -16,12 +16,7 @@ import (
 )
 
 func checkWhoWinsTheElection(A []int) int {
-	currentCounter := 1
-	maxCounter := 1
-	var currentCandidate, maxCandidate int
-	currentCandidate = A[0]
-	maxCandidate = 0
-
+	currentCounter, maxCounter, currentCandidate, maxCandidate := 1, 1, A[0], 0
 	sort.Ints(A)
 	for i := 1; i < len(A); i++ {
 		if A[i] == currentCandidate {
@@ -34,9 +29,7 @@ func checkWhoWinsTheElection(A []int) int {
 			maxCandidate = currentCandidate
 			maxCounter = currentCounter
 		}
-
 	}
-
 	return maxCandidate
 }
 

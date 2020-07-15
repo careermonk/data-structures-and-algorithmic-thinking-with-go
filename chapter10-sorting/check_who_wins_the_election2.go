@@ -37,7 +37,7 @@ func checkWhoWinsTheElection(A []int) int {
 
 	}
 
-	return A[maxCandidate]
+	return maxCandidate
 }
 
 // Driver code

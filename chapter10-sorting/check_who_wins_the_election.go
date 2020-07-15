@@ -10,13 +10,12 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func checkWhoWinsTheElection(A []int) int {
-	counter := 0
-	maxCounter := 0
-	var candidate int
-	candidate = A[0]
+	maxCounter, counter, candidate := 0, 0, A[0]
 	for i := 0; i < len(A); i++ {
 		candidate = A[i]
 		counter = 0

@@ -22,10 +22,7 @@ func reversePairs(head *ListNode, m int, n int) *ListNode {
 
 // return new head and the head of the rest
 func reverseList(head *ListNode, count int) (*ListNode, *ListNode) {
-    if count == 1 { 
-       return head, 
-       head.next 
-    }
+    if count == 1 { return head, head.next }
     newHead, restHead := reverseList(head.next, count - 1)
     head.next.next = head
     head.next = restHead

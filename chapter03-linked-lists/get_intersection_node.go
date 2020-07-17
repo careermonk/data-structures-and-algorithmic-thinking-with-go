@@ -8,27 +8,25 @@
 // 				   warranty; without even the implied warranty of
 // 				    merchantability or fitness for a particular purpose.
 
-func getIntersectionNode(list1, list2 *LinkedList) *ListNode {
+func getIntersectionNode(head1, head2 *ListNode) *ListNode {
     len1, len2 := findLen(list1), findLen(list2)
-    head1, head2 := ll1.head, ll2.head
     if len1 > len2 {
         for ; len1 > len2; len1-- {
-            headA = headA.next
+            head1 = head1.next
         }
     } else {
         for ; len2 > len1; len2-- {
-            headB = headB.next
+            head2 = head2.next
         }
     }
-    for headA != headB {
-        headA, headB = headA.next, headB.next
+    for head1 != head2 {
+        head1, head2 = head1.next, head2.next
     }
-    return headA
+    return head1
 }
-func findLen(ll *LinkedList) int {
+func findLen(head *ListNode) int {
     l := 0
-    current = ll.head
-    for ; current != nil; current = current.next {
+    for ; head != nil; head = head.next {
         l++
     }
     return l

@@ -8,20 +8,12 @@
 // 				   warranty; without even the implied warranty of
 // 				    merchantability or fitness for a particular purpose.
 
-func reversePairs(head *ListNode, m int, n int) *ListNode {
-    dummy := new(ListNode)
-    head, dummy.next = dummy, head
-    for i := 0; i < m-1; i++ { 
-        head = head.next
-         }
-    var curr, prev *ListNode = head.next, nil
-    for i := 0; i < n - m + 1; i++ {
-        next := curr.next
-        curr.next = prev
-        prev = curr
-        curr = next
-    }
-    head.next.next = curr
-    head.next = prev
-    return dummy.next
+func reversePairs(head *ListNode) *ListNode {
+	if head == nil || head.next == nil {
+		return head
+	}
+	result := head.next
+	head.next = swapPairs(head.next.next)
+	result.next = head
+	return result
 }

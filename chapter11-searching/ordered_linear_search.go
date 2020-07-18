@@ -14,9 +14,9 @@ import "fmt"
 
 func  orderedLinearSearch(A []int, data int) int {
   for i, item:= range A {
-    if(item == data) {
+    if item == data {
       return i+1
-    } else if (A[i] > data) {
+    } else if A[i] > data {
       return 0
     }
   }

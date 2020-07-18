@@ -37,7 +37,7 @@ func moveSpacesToBegin(A []rune) {
 }
 
 func main() {
-	var sparr []rune = []rune("move these spaces to beginning\x00")
+	var sparr = []rune("move these spaces to beginning\x00")
 	fmt.Println("Value of A is: ", string(sparr))
 	moveSpacesToBegin(sparr)
 	fmt.Println("Value of A is: ", string(sparr))

@@ -43,9 +43,9 @@ func reverseArray(arr []int, start int, end int) {
 
 // Driver program to test above functions
 func main() {
-	var arr []int = []int{1, 2, 3, 4, 5, 6, 7}
-	var n int = len(arr)
-	var d int = 2
+	var arr = []int{1, 2, 3, 4, 5, 6, 7}
+	var n = len(arr)
+	var d = 2
 	// in case the rotating factor is greater than array length
 	d = d % n
 	leftRotate(arr, d, n)

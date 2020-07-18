@@ -14,7 +14,7 @@ import "fmt"
 
 func linearsearch(A []int, data int) int {
    for i, item:= range A {
-      if(item == data) {
+      if item == data {
          return i+1
 	   }
    }

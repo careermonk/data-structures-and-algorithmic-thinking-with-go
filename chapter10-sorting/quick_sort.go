@@ -11,8 +11,9 @@
 package main
 import "fmt"
 
-func quickSort(A []int) {
+func quickSort(A []int) []int {
 	recursionSort(A, 0, len(A)-1)
+	return A
 }
 
 func recursionSort(A []int, left int, right int) {
@@ -45,7 +46,7 @@ func partition(A []int, left int, right int) int {
 }
 
 func main() {
-	A := []int{3, 4, 5, 2, 1}
+	A := []int{3, 4, 5, 2, 1,99,3,4,90,19,90,3}
 	A = quickSort(A)
 	fmt.Println("\n After quickSort")
 	for _, val := range A {

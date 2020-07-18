@@ -17,7 +17,7 @@ func binarySearch(data int, A []int) bool {
 	low := 0
 	high := len(A) - 1
 	if low <= high {
-		mid := ((high + low) / 2)
+		mid := (high + low) / 2
 		if A[mid] > data {
 			return binarySearch(data, A[:mid])
 		} else if A[mid] < data {

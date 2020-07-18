@@ -29,7 +29,7 @@ func moveZerosToEnd(A []int) {
 }
 
 func main() {
-	var A []int = []int{1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0}
+	var A = []int{1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0}
 	fmt.Println("Input is:  ", A)
 	moveZerosToEnd(A)
 	fmt.Println("Output is: ", A)

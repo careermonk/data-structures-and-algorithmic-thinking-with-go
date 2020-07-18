@@ -16,8 +16,8 @@ import "fmt"
 func findHeight(P []int, n int) int {
 	var maxDepth int
 	for i := 0; i < n; i++ {
-		var j int = i
-		var currentDepth int = 1
+		var j = i
+		var currentDepth = 1
 		for P[j] != -1 {
 			currentDepth++
 			j = P[j]
@@ -31,9 +31,9 @@ func findHeight(P []int, n int) int {
 
 // Test code
 func main() {
-	var P []int = []int{-1, 0, 1, 6, 6, 0, 0, 2, 7}
-	var n int = int(36 / 4)
-	var height int = findHeight(P, n)
+	var P = []int{-1, 0, 1, 6, 6, 0, 0, 2, 7}
+	var n = 36 / 5
+	var height = findHeight(P, n)
 
 	fmt.Println("Height of the given generic tree is: ", height)
 	return

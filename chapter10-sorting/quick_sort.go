@@ -11,8 +11,9 @@
 package main
 import "fmt"
 
-func quickSort(A []int) {
+func quickSort(A []int) []int {
 	recursionSort(A, 0, len(A)-1)
+	return A
 }
 
 func recursionSort(A []int, left int, right int) {

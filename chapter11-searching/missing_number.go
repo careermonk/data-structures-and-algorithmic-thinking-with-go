@@ -33,7 +33,7 @@ func missingNumber1(A []int) int {
 
 func missingNumber2(A []int) int {
 	if len(A) == 0 {
-		return 0
+		return -1
 	}
 	sort.Ints(A)
 
@@ -46,7 +46,6 @@ func missingNumber2(A []int) int {
 			return i
 		}
 	}
-
 	return -1
 }
 
@@ -91,6 +90,17 @@ func missingNumber6(A []int) int {
 	return missing
 }
 
+func missingNumber7(A []int) int {
+	X, Y := 0, 0
+	for i := 0; i < len(A); i++ {
+		X ^= A[i]
+	}
+	for i := 0; i <= len(A); i++ {
+		Y ^= i
+	}
+	return X ^ Y
+}
+
 func main() {
 	A := []int{9, 6, 4, 2, 3, 5, 7, 0, 1}
 	fmt.Println(A)
@@ -102,6 +112,7 @@ func main() {
 	fmt.Println(missingNumber4(A))
 	fmt.Println(missingNumber5(A))
 	fmt.Println(missingNumber6(A))
+	fmt.Println(missingNumber7(A))
 
 	A = []int{3, 0, 1}
 	fmt.Println(A)
@@ -113,4 +124,5 @@ func main() {
 	fmt.Println(missingNumber4(A))
 	fmt.Println(missingNumber5(A))
 	fmt.Println(missingNumber6(A))
+	fmt.Println(missingNumber7(A))
 }

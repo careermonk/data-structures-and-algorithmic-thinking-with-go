@@ -54,7 +54,7 @@ func countSetBits4(n int) int {
 
 // Program to test function countSetBits
 func main() {
-	var i int = 9
+	var i = 9
 	fmt.Println(countSetBits1(i))
 	fmt.Println(countSetBits2(i))
 	fmt.Println(countSetBits3(i))

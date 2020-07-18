@@ -31,7 +31,7 @@ func maxRepetitions1(A []int) []int {
 	return []int{maxCounter, maxElement}
 }
 
-func maxRepititions2(A []int) []int {
+func maxRepetitions2(A []int) []int {
 	maxCounter, maxElement, n := 0, -1, len(A)
 	for i := 0; i < n; i++ {
 		A[A[i]%n] += n
@@ -49,6 +49,6 @@ func main() {
 	A := []int{2, 2, 1, 1, 1, 2, 2}
 	fmt.Println(A)
 
-	// Test the nested loop method.
-	fmt.Println(maxRepititionsBruteForce2(A))
+	fmt.Println(maxRepetitions1(A))
+	fmt.Println(maxRepetitions2(A))
 }

@@ -46,7 +46,7 @@ func partition(A []int, left int, right int) int {
 }
 
 func main() {
-	A := []int{3, 4, 5, 2, 1,99,3,4,90,19,90,3}
+	A := []int{3, 4, 5, 2, 1}
 	A = quickSort(A)
 	fmt.Println("\n After quickSort")
 	for _, val := range A {

@@ -14,21 +14,21 @@ import "fmt"
 
 type Matrix [][]int
 
-func Multiply(m1, m2 Matrix) (m3 Matrix, ok bool) {
-	rows, cols, extra := len(m1), len(m2[0]), len(m2)
-	if len(m1[0]) != extra {
+func multiply(A, B Matrix) (C Matrix, ok bool) {
+	rows, cols, extra := len(A), len(B[0]), len(B)
+	if len(A[0]) != extra {
 		return nil, false
 	}
-	m3 = make(Matrix, rows)
+	C = make(Matrix, rows)
 	for i := 0; i < rows; i++ {
-		m3[i] = make([]int, cols)
+		C[i] = make([]int, cols)
 		for j := 0; j < cols; j++ {
 			for k := 0; k < extra; k++ {
-				m3[i][j] += m1[i][k] * m2[k][j]
+				C[i][j] += A[i][k] * B[k][j]
 			}
 		}
 	}
-	return m3, true
+	return C, true
 }
 
 func (m Matrix) String() string {
@@ -59,7 +59,7 @@ func main() {
 		[]int{4, 5, 6},
 		[]int{7, 8, 9},
 		[]int{10, 11, 12}}
-	P, ok := Multiply(A, B)
+	P, ok := multiply(A, B)
 	if !ok {
 		panic("Invalid dimensions")
 	}

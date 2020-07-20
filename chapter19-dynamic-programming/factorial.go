@@ -40,6 +40,4 @@ func factorialDP(n int) int {
 func main() {
 	fmt.Println(factorial(5))
 	fmt.Println(factorialDP(5))
-	fmt.Println(factorial(5))
-	fmt.Println(factorial(5))
 }

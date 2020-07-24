@@ -10,9 +10,41 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func twoSum(A []int, K int) []int {
+func twoSum1(A []int, target int) []int {
+	for i, v := range A {
+		for j := i + 1; j < len(A); j++ {
+			if A[j] == target-v {
+				return []int{i, j}
+			}
+		}
+	}
+	panic("should never happen")
+}
+
+func twoSum2(A []int, target int) []int {
+	sort.Ints(A)
+	fmt.Println(A)
+	i, j := 0, len(A)-1
+
+	for i < j {
+		sum := A[i] + A[j]
+		if sum == target {
+			break
+		} else if sum < target {
+			i++
+		} else {
+			j--
+		}
+	}
+	return []int{i, j}
+}
+
+func twoSum3(A []int, K int) []int {
 	H := make(map[int]int)
 	for i, v := range A {
 		k := K - v
@@ -26,5 +58,8 @@ func twoSum(A []int, K int) []int {
 
 // Driver program to test above functions
 func main() {
-	fmt.Println(twoSum([]int{2, 7, 11, 15}, 9))
+	fmt.Println(twoSum1([]int{7, 2, 11, 15}, 9))
+	fmt.Println(twoSum2([]int{7, 2, 11, 1}, 9))
+	fmt.Println(twoSum2([]int{7, 2, 11, 1}, 12))
+	fmt.Println(twoSum3([]int{7, 2, 11, 1}, 9))
 }

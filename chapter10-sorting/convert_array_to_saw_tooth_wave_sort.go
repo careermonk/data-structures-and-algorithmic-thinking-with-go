@@ -15,7 +15,7 @@ import (
 	"sort"
 )
 
-func convertArraytoSawToothWave1(A []int) {
+func convertArraytoSawToothWave(A []int) {
 	n := len(A)
 	sort.Ints(A)
 	for i := 1; i < n; i += 2 {
@@ -25,45 +25,13 @@ func convertArraytoSawToothWave1(A []int) {
 	}
 }
 
-func convertArraytoSawToothWave2(A []int) {
-	// Flag true indicates relation "<" is expected, else ">" is expected.  The first expected relation is "<"
-	flag, n := true, len(A)
-
-	for i := 0; i <= n-2; i++ {
-		if flag {
-			// If we have a situation like A > B > C, we get A > B < C by swapping B and C
-			if A[i] > A[i+1] {
-				A[i], A[i+1] = A[i+1], A[i]
-			}
-		} else {
-			// If we have a situation like A < B < C, we get A < C > B by swapping B and C
-			if A[i] < A[i+1] {
-				A[i], A[i+1] = A[i+1], A[i]
-			}
-		}
-		if flag {
-			flag = false
-		} else {
-			flag = true
-		}
-	}
-}
-
 // Driver program to test above functions
 func main() {
 	A := []int{0, -6, 9, 13, 10, -1, 8, 12, 54, 14, -5}
-	convertArraytoSawToothWave1(A)
+	convertArraytoSawToothWave(A)
 	fmt.Println(A)
 
 	A = []int{4, 3, 7, 8, 6, 2, 1}
-	convertArraytoSawToothWave1(A)
-	fmt.Println(A)
-
-	A = []int{0, -6, 9, 13, 10, -1, 8, 12, 54, 14, -5}
-	convertArraytoSawToothWave2(A)
-	fmt.Println(A)
-
-	A = []int{4, 3, 7, 8, 6, 2, 1}
-	convertArraytoSawToothWave2(A)
+	convertArraytoSawToothWave(A)
 	fmt.Println(A)
 }

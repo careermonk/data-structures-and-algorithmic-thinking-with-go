@@ -57,5 +57,5 @@ func maxIndexDiff(A []int) int {
 }
 
 func main() {
-	fmt.Println((maxIndexDiff([]int{9, 2, 3, 4, 5, 6, 7, 8, 18, 0})))
+	fmt.Println(maxIndexDiff([]int{9, 2, 3, 4, 5, 6, 7, 8, 18, 0}))
 }

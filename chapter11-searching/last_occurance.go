@@ -14,22 +14,22 @@ import (
 	"fmt"
 )
 
-func lastOccuranceR(A []int, low, high, data int) int {
+func lastOccurrenceR(A []int, low, high, data int) int {
 	n := len(A)
 	if high >= low {
 		mid := low + (high-low)/2
 		if (mid == n-1 || data < A[mid+1]) && A[mid] == data {
 			return mid
 		} else if data < A[mid] {
-			return lastOccuranceR(A, low, mid-1, data)
+			return lastOccurrenceR(A, low, mid-1, data)
 		} else {
-			return lastOccuranceR(A, mid+1, high, data)
+			return lastOccurrenceR(A, mid+1, high, data)
 		}
 	}
 	return -1
 }
 
-func lastOccurance(A []int, data int) int {
+func lastOccurrence(A []int, data int) int {
 	low, high, res := 0, len(A)-1, -1
 	for low <= high {
 		// Normal Binary Search Logic
@@ -48,8 +48,8 @@ func lastOccurance(A []int, data int) int {
 
 func main() {
 	A := []int{1, 2, 2, 2, 2, 3, 4, 7, 8, 8}
-	fmt.Println(lastOccuranceR(A, 0, len(A)-1, 2))
-	fmt.Println(lastOccuranceR(A, 0, len(A)-1, 8))
-	fmt.Println(lastOccurance(A, 2))
-	fmt.Println(lastOccurance(A, 8))
+	fmt.Println(lastOccurrenceR(A, 0, len(A)-1, 2))
+	fmt.Println(lastOccurrenceR(A, 0, len(A)-1, 8))
+	fmt.Println(lastOccurrence(A, 2))
+	fmt.Println(lastOccurrence(A, 8))
 }

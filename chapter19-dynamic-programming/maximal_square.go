@@ -16,7 +16,7 @@ import (
 
 func maximalSquare(B [][]byte) int {
 	// row column size
-	rows, cols, maxsqlen := len(B), len(B[0]), 0
+	rows, cols, maxSquareLen := len(B), len(B[0]), 0
 	for i := 0; i < rows; i++ {
 		for j := 0; j < cols; j++ {
 			if B[i][j] == 1 {
@@ -38,13 +38,13 @@ func maximalSquare(B [][]byte) int {
 						sqlen++
 					}
 				}
-				if maxsqlen < sqlen {
-					maxsqlen = sqlen
+				if maxSquareLen < sqlen {
+					maxSquareLen = sqlen
 				}
 			}
 		}
 	}
-	return maxsqlen * maxsqlen
+	return maxSquareLen * maxSquareLen
 }
 
 func maximalSquareDP(B [][]byte) int {
@@ -53,7 +53,7 @@ func maximalSquareDP(B [][]byte) int {
 	}
 	// row column size
 	rows, cols := len(B), len(B[0])
-	maxsqlen := 0
+	maxSquareLen := 0
 	T := make([][]int, rows+1)
 	for i := range T {
 		T[i] = make([]int, cols+1)
@@ -63,10 +63,10 @@ func maximalSquareDP(B [][]byte) int {
 			if B[i][j] == 1 {
 				T[i][j] = min(T[i-1][j-1], min(T[i][j-1], T[i-1][j])) + 1
 			}
-			maxsqlen = max(maxsqlen, T[i][j])
+			maxSquareLen = max(maxSquareLen, T[i][j])
 		}
 	}
-	return maxsqlen * maxsqlen
+	return maxSquareLen * maxSquareLen
 }
 func min(a, b int) int {
 	if a < b {

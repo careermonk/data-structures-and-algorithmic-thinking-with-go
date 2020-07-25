@@ -14,7 +14,7 @@ import (
 	"fmt"
 )
 
-func separateEvenOdd(A []int) {
+func separateEvenOdd(A []int) []int {
 	left, right := 0, len(A)-1
 	for left < right {
 		// Increment left index while we see 0 at left
@@ -32,10 +32,11 @@ func separateEvenOdd(A []int) {
 			right--
 		}
 	}
+	return A
 }
 
 func main() {
 	P := []int{12,34,45,9,8,90,3}
-	DutchNationalFlag(P)
+	P=separateEvenOdd(P)
 	fmt.Println(P)
 }

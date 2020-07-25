@@ -30,7 +30,7 @@ func CatalanNumber(n int) int {
 	C[0] = 1
 	for i := 1; i <= n; i++ {
 		for j := 1; j <= i; j++ {
-			C[i] += (C[j-1] * C[i-j])
+			C[i] += C[j-1] * C[i-j]
 		}
 	}
 	return C[n]

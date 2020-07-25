@@ -18,15 +18,15 @@ func minimumJumps(A []int) int {
 	n, step, start, end := len(A), 0, 0, 0
 	for end < n-1 {
 		step++
-		maxend := end + 1
+		maxEnd := end + 1
 		for i := start; i <= end; i++ {
 			if i+A[i] >= n-1 {
 				return step
 			}
-			maxend = max(maxend, i+A[i])
+			maxEnd = max(maxEnd, i+A[i])
 		}
 		start = end + 1
-		end = maxend
+		end = maxEnd
 	}
 	return step
 }

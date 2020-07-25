@@ -35,7 +35,7 @@ func generateK_aryStrings(n int, A []int, i int, k int) {
 }
 
 func main() {
-	var n int = 4
+	var n = 4
 	A := make([]int, n)
 
 	// Print all binary strings

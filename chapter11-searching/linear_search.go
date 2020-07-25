@@ -12,7 +12,7 @@
 package main
 import "fmt"
 
-func linearsearch(A []int, data int) int {
+func linearSearch(A []int, data int) int {
    for i, item:= range A {
       if item == data {
          return i+1
@@ -23,7 +23,7 @@ func linearsearch(A []int, data int) int {
 
 func main() {
    A := []int {67,68,16,8,5,86,29,21,50}
-   a := linearsearch(A, 5)
+   a := linearSearch(A, 5)
    fmt.Printf("The Source Array : %v\n", A)
    fmt.Printf("The element %v is found at %v location", 5, a)
 }

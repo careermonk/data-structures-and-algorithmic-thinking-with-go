@@ -11,7 +11,7 @@
 package main
 import "fmt"
 
-func ShellSort(A []int) {
+func ShellSort(A []int) []int {
 	n := len(A)
 	h := 1
 	for h < n/3 {
@@ -25,12 +25,13 @@ func ShellSort(A []int) {
 		}
 		h /= 3
 	}
+	return A
 }
 
 func main() {
 	A := []int{3, 4, 5, 2, 1}
-	A = insertionSort(A)
-	fmt.Println("\n After Insertion Sorting")
+	A = ShellSort(A)
+	fmt.Println("\n After Shell Sorting")
 	for _, val := range A {
 		fmt.Println(val)
 	}

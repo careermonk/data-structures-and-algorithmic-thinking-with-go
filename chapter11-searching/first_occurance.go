@@ -20,9 +20,9 @@ func firstOccuranceR(A []int, low, high, data int) int {
 		if (mid == 0 || data > A[mid-1]) && A[mid] == data {
 			return mid
 		} else if data > A[mid] {
-			return firstOccuranceR(A, (mid + 1), high, data)
+			return firstOccuranceR(A, mid + 1, high, data)
 		} else {
-			return firstOccuranceR(A, low, (mid - 1), data)
+			return firstOccuranceR(A, low, mid - 1, data)
 		}
 	}
 	return -1

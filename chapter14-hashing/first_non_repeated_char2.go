@@ -14,7 +14,7 @@ import (
 	"fmt"
 )
 
-func firstNonRepeatedChar(s string) rune {
+func firstUniqChar1(s string) rune {
 	m := make(map[rune]uint, len(s)) //preallocate the map size
 	for _, r := range s {
 		m[r]++
@@ -28,7 +28,7 @@ func firstNonRepeatedChar(s string) rune {
 	return rune(0)
 }
 
-func firstNonRepeatedChar2(str string) rune {
+func firstUniqChar2(str string) rune {
 	for i := 0; i < len(str); i++ {
 		repeated := false
 		for j := 0; j < len(str); j++ {
@@ -47,8 +47,8 @@ func firstNonRepeatedChar2(str string) rune {
 func main() {
 	str := "abcedabcd"
 
-	result := firstNonRepeatedChar(str)
+	result := firstUniqChar1(str)
 	fmt.Printf("%c\n", result)
-	result = firstNonRepeatedChar2(str)
+	result = firstUniqChar2(str)
 	fmt.Printf("%c\n", result)
 }

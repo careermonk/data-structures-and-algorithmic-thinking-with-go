@@ -42,7 +42,7 @@ func FindR(e *Element) *Element {
 	}
 }
 
-func BasicUnion(e1, e2 *Element) {
+func Union(e1, e2 *Element) {
 	e1.parent = e2
 }
 
@@ -51,8 +51,8 @@ func main() {
 	bSet := MakeSet("b")
 	oneSet := MakeSet(1)
 	twoSet := MakeSet(2)
-	BasicUnion(aSet, bSet)
-	BasicUnion(oneSet, twoSet)
+	Union(aSet, bSet)
+	Union(oneSet, twoSet)
 	result := Find(aSet)
 	fmt.Println(result.Data)
 	result = Find(bSet)

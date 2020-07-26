@@ -14,7 +14,6 @@ import "fmt"
 
 type Element struct {
 	parent *Element    // Parent element
-	rank   int         // Rank (approximate depth) of the subtree with this element as root
 	Data   interface{} // Arbitrary user-provided payload
 }
 

@@ -34,6 +34,11 @@ func NewStack(capacity uint) *Stack {
 	return new(Stack).Init(capacity)
 }
 
+// Returns the size of the size
+func (stack *Stack) Size() int {
+	return stack.top + 1
+}
+
 // Stack is full when top is equal to the last index
 func (stack *Stack) IsFull() bool {
 	return stack.top == int(stack.capacity)-1
@@ -70,6 +75,12 @@ func (stack *Stack) Peek() (interface{}, error) {
 	return temp, nil
 }
 
+// Drain removes all elements that are currently in the stack.
+func (stack *Stack) Drain() {
+	stack.array = nil
+	stack.top = -1
+}
+
 func main() {
 	stack := NewStack(100)
 
@@ -79,9 +90,12 @@ func main() {
 	fmt.Println("Pushed to stack : 20")
 	stack.Push(30)
 	fmt.Println("Pushed to stack : 30")
+	fmt.Println("Stack size: ", stack.Size())
 
 	data, _ := stack.Peek()
 	fmt.Println("Top element : ", data)
 	data, _ = stack.Pop()
 	fmt.Println("Popped from stack : ", data)
+	stack.Drain()
+	fmt.Println("Stack size: ", stack.Size())
 }

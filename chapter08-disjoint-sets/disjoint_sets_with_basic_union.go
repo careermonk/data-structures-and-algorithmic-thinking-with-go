@@ -27,7 +27,6 @@ func MakeSet(Data interface{}) *Element {
 
 func Find(e *Element) *Element {
 	for e.parent != e {
-		e.parent = e.parent.parent
 		e = e.parent
 	}
 	return e

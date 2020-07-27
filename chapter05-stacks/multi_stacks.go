@@ -120,19 +120,14 @@ func main() {
 	fmt.Println("Pushed to stacks : 30")
 	stacks.Push(2, 40)
 	fmt.Println("Pushed to stacks : 40")
-	fmt.Println("MultiStacks size: ", stacks.Size(1))
-	fmt.Println("MultiStacks size: ", stacks.Size(2))
+	fmt.Println("MultiStacks size: ", stacks.Size(1), stacks.Size(2))
 
-	fmt.Println("Top element : ", stacks.Peek(1))
-	fmt.Println("Top element : ", stacks.Peek(2))
+	fmt.Println("Top elements : ", stacks.Peek(1), stacks.Peek(2))
 
-	fmt.Println("Popped from stacks : ", stacks.Pop(1))
-	fmt.Println("Popped from stacks : ", stacks.Pop(2))
-	fmt.Println("MultiStacks size: ", stacks.Size(1))
-	fmt.Println("MultiStacks size: ", stacks.Size(2))
-	fmt.Println("Top element : ", stacks.Peek(1))
-	fmt.Println("Top element : ", stacks.Peek(2))
+	fmt.Println("Popped from stacks : ", stacks.Pop(1), stacks.Pop(2))
+	fmt.Println("MultiStacks size: ", stacks.Size(1), stacks.Size(2))
+	fmt.Println("Top elements : ", stacks.Peek(1), stacks.Peek(2))
+
 	stacks.Drain()
-	fmt.Println("MultiStacks size: ", stacks.Size(1))
-	fmt.Println("MultiStacks size: ", stacks.Size(2))
+	fmt.Println("MultiStacks size: ", stacks.Size(1), stacks.Size(2))
 }

@@ -50,7 +50,7 @@ func (stack *MinStack) Pop() int {
 		stack.minimumsStack = stack.minimumsStack[:len(stack.minimumsStack)-1]
 		return popped
 	} else {
-		return math.MaxInt32
+		return math.MinInt32
 	}
 }
 
@@ -58,7 +58,7 @@ func (stack *MinStack) Peek() int {
 	if len(stack.elementStack) > 0 {
 		return stack.elementStack[len(stack.elementStack)-1]
 	} else {
-		return 0
+		return math.MinInt32
 	}
 }
 

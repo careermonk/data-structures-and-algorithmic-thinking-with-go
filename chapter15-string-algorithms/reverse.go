@@ -14,7 +14,7 @@ import (
 	"fmt"
 )
 
-func Reverse(s string) string {
+func reverse(s string) string {
 	r := []rune(s)
 	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
 		r[i], r[j] = r[j], r[i]
@@ -22,7 +22,7 @@ func Reverse(s string) string {
 	return string(r)
 }
 
-func Reverse2(s string) string {
+func reverse2(s string) string {
 	r := []rune(s)
 	for i, j := 0, len(r)-1; i < len(r)/2; i, j = i+1, j-1 {
 		r[i] ^= r[j]
@@ -33,6 +33,6 @@ func Reverse2(s string) string {
 }
 
 func main() {
-	fmt.Println(Reverse("Hello, world"))
-	fmt.Println(Reverse2("Hello, world"))
+	fmt.Println(reverse("Hello, world"))
+	fmt.Println(reverse2("Hello, world"))
 }

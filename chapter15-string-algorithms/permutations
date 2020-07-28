@@ -1,0 +1,41 @@
+// Copyright (c) July 12, 2020 CareerMonk Publications and others.
+// E-Mail           		: info@careermonk.com
+// Creation Date    		: 2020-07-12 06:15:46
+// Last modification		: 2020-07-12
+//               by		: Narasimha Karumanchi
+// Book Title			: Data Structures And Algorithmic Thinking With Go
+// Warranty         		: This software is provided "as is" without any
+// 				   warranty without even the implied warranty of
+//
+
+package main
+
+import (
+	"fmt"
+)
+
+func permutations(nums []int) [][]int {
+	result := [][]int{{}}
+	for _, num := range nums {
+		// New slice to hold results from current step
+		curResult := [][]int{}
+		// Get all the permutations in current result
+		for _, per := range result {
+			for i := 0; i < len(per)+1; i++ {
+				// Make a slice one element bigger
+				item := make([]int, len(per)+1)
+				item[i] = num
+				copy(item[:i], per[:i])
+				copy(item[i+1:], per[i:])
+				curResult = append(curResult, item)
+			}
+		}
+		// Make current result the new result
+		result = curResult
+	}
+	return result
+}
+
+func main() {
+	fmt.Println(permutations([]int{1, 2, 3}))
+}

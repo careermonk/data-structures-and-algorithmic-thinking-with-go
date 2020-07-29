@@ -196,6 +196,23 @@ func (q *Queue) EnQueue(v interface{}) {
 	q.size++
 }
 
+// deQueue removes and returns the first element of queue q or MinInt.
+func (q *Queue) DeQueue() interface{} {
+	if q.IsEmpty() {
+		return MinInt
+	}
+	data := q.array[q.front]
+	if q.front == q.rear {
+		q.front = -1
+		q.rear = -1
+		q.size = 0
+	} else {
+		q.front = (q.front + 1) % q.capacity
+		q.size -= 1
+	}
+	return data
+}
+
 func reverseQueueFirstKElements(q *Queue, k int) {
 	if q == nil || k > q.Size() {
 		return

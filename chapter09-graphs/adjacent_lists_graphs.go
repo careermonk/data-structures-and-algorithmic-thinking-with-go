@@ -108,11 +108,12 @@ func (G *AdjacencyList) AddEdge(vertexOne int, vertexTwo int) error {
 	}
 	node := G.AdjList[vertexOne].AddNode(vertexTwo)
 	G.AdjList[vertexOne] = node
+	G.Edges++
 	if G.GraphType == UNDIRECTED {
 		node := G.AdjList[vertexTwo].AddNode(vertexOne)
 		G.AdjList[vertexTwo] = node
+		G.Edges++
 	}
-	G.Edges++
 	return nil
 }
 

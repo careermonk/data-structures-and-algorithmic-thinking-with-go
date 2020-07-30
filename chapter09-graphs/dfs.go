@@ -242,7 +242,7 @@ func DFS(G *AdjacencyList) []int {
 
 func dfs(G *AdjacencyList, visited map[int]bool, current int, dfsArrayOrdered []int) []int {
 	if visited[current] {
-		return dfsArrayOrdered 
+		return dfsArrayOrdered
 	}
 	visited[current] = true
 	adjNodes := G.GetAdjacentNodesForVertex(current)
@@ -254,34 +254,31 @@ func dfs(G *AdjacencyList, visited map[int]bool, current int, dfsArrayOrdered []
 }
 
 // Tests
-var testAdjListUnDirectedDFT *AdjacencyList
-var testAdjListDirectedDFT *AdjacencyList
-
 func main() {
 	Test_DFSAdjacencyListUndirected()
 	Test_DFSAdjacencyListDirected()
 }
 
 func Test_DFSAdjacencyListUndirected() {
-	testAdjListUnDirectedDFT = &AdjacencyList{4, 0, UNDIRECTED, nil}
-	testAdjListUnDirectedDFT.Init()
-	testAdjListUnDirectedDFT.AddEdge(2, 1)
-	testAdjListUnDirectedDFT.AddEdge(3, 2)
-	testAdjListUnDirectedDFT.AddEdge(2, 0)
-	testAdjListUnDirectedDFT.AddEdge(1, 0)
-	testAdjListUnDirectedDFT.AddEdge(1, 1)
-	testAdjListUnDirectedDFT.AddEdge(2, 3)
-	fmt.Printf("Graph after DFS Undirected List is %v \n", DFS(testAdjListUnDirectedDFT))
+	G := &AdjacencyList{4, 0, UNDIRECTED, nil}
+	G.Init()
+	G.AddEdge(2, 1)
+	G.AddEdge(3, 2)
+	G.AddEdge(2, 0)
+	G.AddEdge(1, 0)
+	G.AddEdge(1, 1)
+	G.AddEdge(2, 3)
+	fmt.Printf("Graph after DFS Undirected List is %v \n", DFS(G))
 }
 
 func Test_DFSAdjacencyListDirected() {
-	testAdjListDirectedDFT = &AdjacencyList{4, 0, DIRECTED, nil}
-	testAdjListDirectedDFT.Init()
-	testAdjListDirectedDFT.AddEdge(2, 1)
-	testAdjListDirectedDFT.AddEdge(3, 2)
-	testAdjListDirectedDFT.AddEdge(2, 0)
-	testAdjListDirectedDFT.AddEdge(1, 0)
-	testAdjListDirectedDFT.AddEdge(1, 1)
-	testAdjListDirectedDFT.AddEdge(2, 3)
-	fmt.Printf("Graph after DFS Directed List is %v", DFS(testAdjListDirectedDFT))
+	G := &AdjacencyList{4, 0, DIRECTED, nil}
+	G.Init()
+	G.AddEdge(2, 1)
+	G.AddEdge(3, 2)
+	G.AddEdge(2, 0)
+	G.AddEdge(1, 0)
+	G.AddEdge(1, 1)
+	G.AddEdge(2, 3)
+	fmt.Printf("Graph after DFS Directed List is %v", DFS(G))
 }

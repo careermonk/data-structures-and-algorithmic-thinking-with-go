@@ -233,24 +233,24 @@ func (G *AdjacencyList) GetIndegreeForVertex(vertex int) int {
 
 func DFS(G *AdjacencyList) []int {
 	visited := map[int]bool{}
-	var dfsArrayOrdered []int
+	var dfsOrdered []int
 	for i := 0; i < G.GetNumberOfVertices(); i++ {
-		dfsArrayOrdered = dfs(G, visited, i, dfsArrayOrdered)
+		dfs(G, visited, i, &dfsOrdered)
 	}
-	return dfsArrayOrdered
+	return dfsOrdered
 }
 
-func dfs(G *AdjacencyList, visited map[int]bool, current int, dfsArrayOrdered []int) []int {
+func dfs(G *AdjacencyList, visited map[int]bool, current int, dfsOrdered *[]int) {
 	if visited[current] {
-		return dfsArrayOrdered
+		return
 	}
 	visited[current] = true
 	adjNodes := G.GetAdjacentNodesForVertex(current)
 	for key, _ := range adjNodes {
-		dfsArrayOrdered = dfs(G, visited, key, dfsArrayOrdered)
+		dfs(G, visited, key, dfsOrdered)
 	}
-	dfsArrayOrdered = append(dfsArrayOrdered, current)
-	return dfsArrayOrdered
+	*dfsOrdered = append(*dfsOrdered, current)
+	return
 }
 
 // Tests
@@ -268,7 +268,7 @@ func Test_DFSAdjacencyListUndirected() {
 	G.AddEdge(1, 0)
 	G.AddEdge(1, 1)
 	G.AddEdge(2, 3)
-	fmt.Printf("Graph after DFS Undirected List is %v \n", DFS(G))
+	fmt.Printf("Undirected Graph with DFS is %v \n", DFS(G))
 }
 
 func Test_DFSAdjacencyListDirected() {
@@ -280,5 +280,5 @@ func Test_DFSAdjacencyListDirected() {
 	G.AddEdge(1, 0)
 	G.AddEdge(1, 1)
 	G.AddEdge(2, 3)
-	fmt.Printf("Graph after DFS Directed List is %v", DFS(G))
+	fmt.Printf("Directed Graph with DFS is %v", DFS(G))
 }

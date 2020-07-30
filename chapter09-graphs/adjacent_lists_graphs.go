@@ -123,11 +123,12 @@ func (G *AdjacencyList) AddEdgeWithWeight(vertexOne int, vertexTwo int, weight i
 	}
 	node := G.AdjList[vertexOne].AddNodeWithWeight(vertexTwo, weight)
 	G.AdjList[vertexOne] = node
+	G.Edges++
 	if G.GraphType == UNDIRECTED {
 		node := G.AdjList[vertexTwo].AddNodeWithWeight(vertexOne, weight)
 		G.AdjList[vertexTwo] = node
+		G.Edges++
 	}
-	G.Edges++
 	return nil
 }
 

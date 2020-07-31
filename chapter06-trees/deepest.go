@@ -31,6 +31,61 @@ func NewBinraryTree(n, k int) *BinraryTreeNode {
 	return root
 }
 
+func Insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
+	newNode := &BinraryTreeNode{nil, v, nil}
+	if root == nil {
+		return newNode
+	}
+	queue := []*BinraryTreeNode{root}
+	for len(queue) > 0 {
+		qlen := len(queue)
+		for i := 0; i < qlen; i++ {
+			node := queue[0]
+			queue = queue[1:]
+			if node.left != nil {
+				queue = append(queue, node.left)
+			} else {
+				node.left = newNode
+				return root
+			}
+			if node.right != nil {
+				queue = append(queue, node.right)
+			} else {
+				node.right = newNode
+				return root
+			}
+		}
+	}
+	return root
+}
+
+// Compute the number of nodes in a tree.
+func Size(root *BinraryTreeNode) int {
+	if root == nil {
+		return 0
+	}
+	var result int
+	queue := []*BinraryTreeNode{root}
+	for len(queue) > 0 {
+		qlen := len(queue)
+		var level []int
+		for i := 0; i < qlen; i++ {
+			node := queue[0]
+			result++
+			level = append(level, node.data)
+			queue = queue[1:]
+			if node.left != nil {
+				queue = append(queue, node.left)
+			}
+			if node.right != nil {
+				queue = append(queue, node.right)
+			}
+		}
+
+	}
+	return result
+}
+
 func LevelOrder(root *BinraryTreeNode) [][]int { // Data from each level is being returned as a separate list
 	if root == nil {
 		return [][]int{}
@@ -57,35 +112,6 @@ func LevelOrder(root *BinraryTreeNode) [][]int { // Data from each level is bein
 	return result
 }
 
-func Insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
-	newNode := &BinraryTreeNode{nil, v, nil}
-	if root == nil {
-		return newNode
-	}
-	if root.left == nil {
-		root.left = Insert(root.left, v)
-	} else if root.right == nil {
-		root.right = Insert(root.right, v)
-	} else {
-		randomize := rand.Intn(1) // select either left or right randomly; It generate 0 or 1
-		if randomize == 0 {
-			root.left = Insert(root.left, v)
-		} else {
-			root.right = Insert(root.right, v)
-		}
-	}
-	return root
-}
-
-// Compute the number of nodes in a tree.
-func Size(root *BinraryTreeNode) int {
-	if root == nil {
-		return 0
-	} else {
-		return Size(root.left) + 1 + Size(root.right)
-	}
-}
-
 func DeleteTree(root *BinraryTreeNode) *BinraryTreeNode {
 	if root == nil {
 		return nil
@@ -98,21 +124,59 @@ func DeleteTree(root *BinraryTreeNode) *BinraryTreeNode {
 	return root
 }
 
-// Compute the height (or depth) of a tree
+// Compute the height (or depth) of a tree.
 func Height(root *BinraryTreeNode) int {
 	if root == nil {
 		return 0
-	} else {
-		// compute the depth of each subtree
-		leftheight := Height(root.left)
-		rightheight := Height(root.right)
+	}
+	count := 0
+	queue := []*BinraryTreeNode{root}
+	for len(queue) > 0 {
+		qlen := len(queue)
+		var level []int
+		for i := 0; i < qlen; i++ {
+			node := queue[0]
 
-		if leftheight > rightheight {
-			return leftheight + 1
-		} else {
-			return rightheight + 1
+			level = append(level, node.data)
+			queue = queue[1:]
+
+			if node.left != nil {
+				queue = append(queue, node.left)
+			}
+			if node.right != nil {
+				queue = append(queue, node.right)
+			}
+		}
+		count++
+	}
+	return count
+}
+
+// Compute the deepest node of a tree
+func Deepest(root *BinraryTreeNode) *BinraryTreeNode {
+	if root == nil {
+		return nil
+	}
+	var node *BinraryTreeNode
+	queue := []*BinraryTreeNode{root}
+	for len(queue) > 0 {
+		qlen := len(queue)
+		var level []int
+		for i := 0; i < qlen; i++ {
+			node = queue[0]
+
+			level = append(level, node.data)
+			queue = queue[1:]
+
+			if node.left != nil {
+				queue = append(queue, node.left)
+			}
+			if node.right != nil {
+				queue = append(queue, node.right)
+			}
 		}
 	}
+	return node 
 }
 
 func main() {
@@ -120,6 +184,8 @@ func main() {
 	fmt.Println(LevelOrder(t1))
 	fmt.Println(Size(t1))
 	fmt.Println(Height(t1))
+
+	fmt.Println(Deepest(t1))
 
 	t1 = DeleteTree(t1)
 

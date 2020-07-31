@@ -15,28 +15,28 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = Insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func LevelOrder(root *BinraryTreeNode) [][]int { // Data from each level is being returned as a separate list
+func LevelOrder(root *BinaryTreeNode) [][]int { // Data from each level is being returned as a separate list
 	if root == nil {
 		return [][]int{}
 	}
 	var result [][]int
-	queue := []*BinraryTreeNode{root}
+	queue := []*BinaryTreeNode{root}
 	for len(queue) > 0 {
 		qlen := len(queue)
 		var level []int
@@ -57,8 +57,8 @@ func LevelOrder(root *BinraryTreeNode) [][]int { // Data from each level is bein
 	return result
 }
 
-func Insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
-	newNode := &BinraryTreeNode{nil, v, nil}
+func Insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
+	newNode := &BinaryTreeNode{nil, v, nil}
 	if root == nil {
 		return newNode
 	}
@@ -78,7 +78,7 @@ func Insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
 }
 
 // Compute the number of nodes in a tree.
-func Size(root *BinraryTreeNode) int {
+func Size(root *BinaryTreeNode) int {
 	if root == nil {
 		return 0
 	} else {
@@ -86,7 +86,7 @@ func Size(root *BinraryTreeNode) int {
 	}
 }
 
-func DeleteTree(root *BinraryTreeNode) *BinraryTreeNode {
+func DeleteTree(root *BinaryTreeNode) *BinaryTreeNode {
 	if root == nil {
 		return nil
 	}
@@ -99,7 +99,7 @@ func DeleteTree(root *BinraryTreeNode) *BinraryTreeNode {
 }
 
 // Compute the height (or depth) of a tree
-func Height(root *BinraryTreeNode) int {
+func Height(root *BinaryTreeNode) int {
 	if root == nil {
 		return 0
 	} else {
@@ -116,7 +116,7 @@ func Height(root *BinraryTreeNode) int {
 }
 
 func main() {
-	t1 := NewBinraryTree(20, 1)
+	t1 := NewBinaryTree(20, 1)
 	fmt.Println(LevelOrder(t1))
 	fmt.Println(Size(t1))
 	fmt.Println(Height(t1))

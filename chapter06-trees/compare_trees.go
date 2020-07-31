@@ -58,8 +58,8 @@ func Compare(t1, t2 *BinaryTreeNode) bool {
 	return false
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinaryTreeNode {
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
 	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = insert(root, (1+v)*k)
@@ -80,9 +80,9 @@ func insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
 }
 
 func main() {
-	t1 := NewBinraryTree(100, 1)
-	fmt.Println(Compare(t1, NewBinraryTree(100, 1)), "Same Contents")
-	fmt.Println(Compare(t1, NewBinraryTree(99, 1)), "Differing Sizes")
-	fmt.Println(Compare(t1, NewBinraryTree(100, 2)), "Differing Values")
-	fmt.Println(Compare(t1, NewBinraryTree(101, 2)), "Dissimilar")
+	t1 := NewBinaryTree(100, 1)
+	fmt.Println(Compare(t1, NewBinaryTree(100, 1)), "Same Contents")
+	fmt.Println(Compare(t1, NewBinaryTree(99, 1)), "Differing Sizes")
+	fmt.Println(Compare(t1, NewBinaryTree(100, 2)), "Differing Values")
+	fmt.Println(Compare(t1, NewBinaryTree(101, 2)), "Dissimilar")
 }

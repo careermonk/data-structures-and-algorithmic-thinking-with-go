@@ -15,15 +15,15 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
 // Walk traverses a tree depth-first, sending each data on a channel.
-func Walk(root *BinraryTreeNode, ch chan int) {
+func Walk(root *BinaryTreeNode, ch chan int) {
 	if root == nil {
 		return
 	}
@@ -33,7 +33,7 @@ func Walk(root *BinraryTreeNode, ch chan int) {
 }
 
 // Walker launches Walk in a new goroutine, and returns a read-only channel of values.
-func Walker(root *BinraryTreeNode) <-chan int {
+func Walker(root *BinaryTreeNode) <-chan int {
 	ch := make(chan int)
 	go func() {
 		Walk(root, ch)
@@ -43,7 +43,7 @@ func Walker(root *BinraryTreeNode) <-chan int {
 }
 
 // Compare reads values from two Walkers that run simultaneously, and returns true if t1 and t2 have the same contents.
-func Compare(t1, t2 *BinraryTreeNode) bool {
+func Compare(t1, t2 *BinaryTreeNode) bool {
 	c1, c2 := Walker(t1), Walker(t2)
 	for {
 		v1, ok1 := <-c1
@@ -59,17 +59,17 @@ func Compare(t1, t2 *BinraryTreeNode) bool {
 }
 
 // NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+func NewBinraryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
+func insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
 	if root == nil {
-		return &BinraryTreeNode{nil, v, nil}
+		return &BinaryTreeNode{nil, v, nil}
 	}
 	if v < root.data {
 		root.left = insert(root.left, v)

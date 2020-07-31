@@ -15,15 +15,15 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
 // InOrder traverses a tree in pre-order
-func InOrder(root *BinraryTreeNode) {
+func InOrder(root *BinaryTreeNode) {
 	if root == nil {
 		return
 	}
@@ -34,7 +34,7 @@ func InOrder(root *BinraryTreeNode) {
 }
 
 // InOrderWalk traverses a tree in in-order, sending each data on a channel.
-func InOrderWalk(root *BinraryTreeNode, ch chan int) {
+func InOrderWalk(root *BinaryTreeNode, ch chan int) {
 	if root == nil {
 		return
 	}
@@ -45,7 +45,7 @@ func InOrderWalk(root *BinraryTreeNode, ch chan int) {
 }
 
 // Walker launches Walk in a new goroutine, and returns a read-only channel of values.
-func InOrderWalker(root *BinraryTreeNode) <-chan int {
+func InOrderWalker(root *BinaryTreeNode) <-chan int {
 	ch := make(chan int)
 	go func() {
 		InOrderWalk(root, ch)
@@ -54,18 +54,18 @@ func InOrderWalker(root *BinraryTreeNode) <-chan int {
 	return ch
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
+func insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
 	if root == nil {
-		return &BinraryTreeNode{nil, v, nil}
+		return &BinaryTreeNode{nil, v, nil}
 	}
 	if v < root.data {
 		root.left = insert(root.left, v)
@@ -76,7 +76,7 @@ func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
 }
 
 func main() {
-	t1 := NewBinraryTree(10, 1)
+	t1 := NewBinaryTree(10, 1)
 
 	// InOrder walk with print statements
 	InOrder(t1)

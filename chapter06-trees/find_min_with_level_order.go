@@ -16,25 +16,25 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
+func insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
 	if root == nil {
-		return &BinraryTreeNode{nil, v, nil}
+		return &BinaryTreeNode{nil, v, nil}
 	}
 	if v < root.data {
 		root.left = insert(root.left, v)
@@ -44,12 +44,12 @@ func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
 	return root
 }
 
-func findMin(root *BinraryTreeNode) int {
+func findMin(root *BinaryTreeNode) int {
 	min := math.MaxInt32
 	if root == nil {
 		return min
 	}
-	queue := []*BinraryTreeNode{root}
+	queue := []*BinaryTreeNode{root}
 	for len(queue) > 0 {
 		qlen := len(queue)
 		for i := 0; i < qlen; i++ {
@@ -71,6 +71,6 @@ func findMin(root *BinraryTreeNode) int {
 }
 
 func main() {
-	t1 := NewBinraryTree(10, 1)
+	t1 := NewBinaryTree(10, 1)
 	fmt.Println(findMin(t1))
 }

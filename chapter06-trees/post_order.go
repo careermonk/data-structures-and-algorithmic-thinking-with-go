@@ -15,15 +15,15 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
 // PostOrder traverses a tree in pre-order
-func PostOrder(root *BinraryTreeNode) {
+func PostOrder(root *BinaryTreeNode) {
 	if root == nil {
 		return
 	}
@@ -34,7 +34,7 @@ func PostOrder(root *BinraryTreeNode) {
 }
 
 // PostOrderWalk traverses a tree in in-order, sending each data on a channel.
-func PostOrderWalk(root *BinraryTreeNode, ch chan int) {
+func PostOrderWalk(root *BinaryTreeNode, ch chan int) {
 	if root == nil {
 		return
 	}
@@ -45,7 +45,7 @@ func PostOrderWalk(root *BinraryTreeNode, ch chan int) {
 }
 
 // PostOrderWalker launches Walk in a new goroutine, and returns a read-only channel of values.
-func PostOrderWalker(root *BinraryTreeNode) <-chan int {
+func PostOrderWalker(root *BinaryTreeNode) <-chan int {
 	ch := make(chan int)
 	go func() {
 		PostOrderWalk(root, ch)
@@ -54,18 +54,18 @@ func PostOrderWalker(root *BinraryTreeNode) <-chan int {
 	return ch
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
+func insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
 	if root == nil {
-		return &BinraryTreeNode{nil, v, nil}
+		return &BinaryTreeNode{nil, v, nil}
 	}
 	if v < root.data {
 		root.left = insert(root.left, v)
@@ -76,7 +76,7 @@ func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
 }
 
 func main() {
-	t1 := NewBinraryTree(10, 1)
+	t1 := NewBinaryTree(10, 1)
 
 	// PostOrder walk with print statements
 	PostOrder(t1)

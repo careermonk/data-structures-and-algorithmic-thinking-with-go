@@ -152,7 +152,7 @@ func (q *DeQueue) shrinkIfExcess() {
 		q.resize()
 	}
 }
-.
+
 func (q *DeQueue) resize() {
 	newBuf := make([]interface{}, q.size<<1)
 	if q.tail > q.head {
@@ -165,4 +165,37 @@ func (q *DeQueue) resize() {
 	q.head = 0
 	q.tail = q.size
 	q.buffer = newBuf
+}
+
+func main(){
+	var q DeQueue
+	q.PushBack("foo")
+	q.PushBack("bar")
+	q.PushBack("baz")
+	if q.Front() != "foo" {
+		fmt.Println("wrong value at front of queue")
+	}
+	if q.Back() != "baz" {
+		fmt.Println("wrong value at back of queue")
+	}
+
+	if q.PopFront() != "foo" {
+		fmt.Println("wrong value removed from front of queue")
+	}
+	if q.Front() != "bar" {
+		fmt.Println("wrong value remaining at front of queue")
+	}
+	if q.Back() != "baz" {
+		fmt.Println("wrong value remaining at back of queue")
+	}
+
+	if q.PopBack() != "baz" {
+		fmt.Println("wrong value removed from back of queue")
+	}
+	if q.Front() != "bar" {
+		fmt.Println("wrong value remaining at front of queue")
+	}
+	if q.Back() != "bar" {
+		fmt.Println("wrong value remaining at back of queue")
+	}
 }

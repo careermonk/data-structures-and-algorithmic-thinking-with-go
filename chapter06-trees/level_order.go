@@ -43,7 +43,7 @@ func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
 	return root
 }
 
-func levelOrder(root *BinraryTreeNode) [][]int { // Data from each level is being returned as a separate list
+func LevelOrder(root *BinraryTreeNode) [][]int { // Data from each level is being returned as a separate list
 	if root == nil {
 		return [][]int{}
 	}
@@ -71,5 +71,5 @@ func levelOrder(root *BinraryTreeNode) [][]int { // Data from each level is bein
 
 func main() {
 	t1 := NewBinraryTree(10, 1)
-	fmt.Println(levelOrder(t1))
+	fmt.Println(LevelOrder(t1))
 }

@@ -15,25 +15,25 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
+func insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
 	if root == nil {
-		return &BinraryTreeNode{nil, v, nil}
+		return &BinaryTreeNode{nil, v, nil}
 	}
 	if v < root.data {
 		root.left = insert(root.left, v)
@@ -127,7 +127,7 @@ func (stack *Stack) Drain() {
 }
 
 // PostOrderWalk traverses a tree in in-order, sending each data on a channel.
-func PostOrderWalk(root *BinraryTreeNode, ch chan int) {
+func PostOrderWalk(root *BinaryTreeNode, ch chan int) {
 	if root == nil {
 		return
 	}
@@ -138,7 +138,7 @@ func PostOrderWalk(root *BinraryTreeNode, ch chan int) {
 }
 
 // PostOrderWalker launches Walk in a new goroutine, and returns a read-only channel of values.
-func PostOrderWalker(root *BinraryTreeNode) <-chan int {
+func PostOrderWalker(root *BinaryTreeNode) <-chan int {
 	ch := make(chan int)
 	go func() {
 		PostOrderWalk(root, ch)
@@ -147,12 +147,12 @@ func PostOrderWalker(root *BinraryTreeNode) <-chan int {
 	return ch
 }
 
-func PostOrder1(root *BinraryTreeNode) []int {
+func PostOrder1(root *BinaryTreeNode) []int {
 	var result []int
 	stack := NewStack(1)
 	stack.Push(root)
 	for !stack.IsEmpty() {
-		temp := stack.Pop().(*BinraryTreeNode)
+		temp := stack.Pop().(*BinaryTreeNode)
 
 		result = append(result, temp.data)
 
@@ -173,9 +173,9 @@ func PostOrder1(root *BinraryTreeNode) []int {
 	return result
 }
 
-func PostOrder2(root *BinraryTreeNode) []int {
+func PostOrder2(root *BinaryTreeNode) []int {
 	result := []int{}
-	stack := []*BinraryTreeNode{root}
+	stack := []*BinaryTreeNode{root}
 
 	for len(stack) > 0 {
 		root = stack[len(stack)-1]
@@ -202,7 +202,7 @@ func PostOrder2(root *BinraryTreeNode) []int {
 }
 
 func main() {
-	t1 := NewBinraryTree(10, 1)
+	t1 := NewBinaryTree(10, 1)
 	PostOrder1(t1)
 	fmt.Println()
 	PostOrder2(t1)

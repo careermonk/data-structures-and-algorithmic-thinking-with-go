@@ -15,25 +15,25 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
+func insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
 	if root == nil {
-		return &BinraryTreeNode{nil, v, nil}
+		return &BinaryTreeNode{nil, v, nil}
 	}
 	if v < root.data {
 		root.left = insert(root.left, v)
@@ -126,7 +126,7 @@ func (stack *Stack) Drain() {
 	stack.top = -1
 }
 
-func InOrder(root *BinraryTreeNode) {
+func InOrder(root *BinaryTreeNode) {
 	if root == nil {
 		return
 	}
@@ -138,7 +138,7 @@ func InOrder(root *BinraryTreeNode) {
 			temp = temp.left
 		} else {
 			obj := stack.Pop()
-			temp = obj.(*BinraryTreeNode)
+			temp = obj.(*BinaryTreeNode)
 			fmt.Printf("%d ", temp.data)
 			temp = temp.right
 		}
@@ -146,6 +146,6 @@ func InOrder(root *BinraryTreeNode) {
 }
 
 func main() {
-	t1 := NewBinraryTree(10, 1)
+	t1 := NewBinaryTree(10, 1)
 	InOrder(t1)
 }

@@ -15,28 +15,28 @@ import (
 	"math/rand"
 )
 
-// A BinraryTreeNode is a binary tree with integer values.
-type BinraryTreeNode struct {
-	left  *BinraryTreeNode
+// A BinaryTreeNode is a binary tree with integer values.
+type BinaryTreeNode struct {
+	left  *BinaryTreeNode
 	data  int
-	right *BinraryTreeNode
+	right *BinaryTreeNode
 }
 
-// NewBinraryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
-func NewBinraryTree(n, k int) *BinraryTreeNode {
-	var root *BinraryTreeNode
+// NewBinaryTree returns a new, random binary tree holding the values 1k, 2k, ..., nk.
+func NewBinaryTree(n, k int) *BinaryTreeNode {
+	var root *BinaryTreeNode
 	for _, v := range rand.Perm(n) {
 		root = Insert(root, (1+v)*k)
 	}
 	return root
 }
 
-func Insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
-	newNode := &BinraryTreeNode{nil, v, nil}
+func Insert(root *BinaryTreeNode, v int) *BinaryTreeNode {
+	newNode := &BinaryTreeNode{nil, v, nil}
 	if root == nil {
 		return newNode
 	}
-	queue := []*BinraryTreeNode{root}
+	queue := []*BinaryTreeNode{root}
 	for len(queue) > 0 {
 		qlen := len(queue)
 		for i := 0; i < qlen; i++ {
@@ -59,12 +59,12 @@ func Insert(root *BinraryTreeNode, v int) *BinraryTreeNode {
 	return root
 }
 
-func LevelOrderBottomUp(root *BinraryTreeNode) [][]int { // Data from each level is being returned as a separate list
+func LevelOrderBottomUp(root *BinaryTreeNode) [][]int { // Data from each level is being returned as a separate list
 	if root == nil {
 		return [][]int{}
 	}
 	var result [][]int
-	queue := []*BinraryTreeNode{root}
+	queue := []*BinaryTreeNode{root}
 	stack := NewStack(1)
 
 	for len(queue) > 0 {
@@ -91,7 +91,7 @@ func LevelOrderBottomUp(root *BinraryTreeNode) [][]int { // Data from each level
 }
 
 func main() {
-	t1 := NewBinraryTree(20, 1)
+	t1 := NewBinaryTree(20, 1)
 	fmt.Println(LevelOrderBottomUp(t1))
 }
 

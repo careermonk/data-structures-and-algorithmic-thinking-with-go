@@ -28,6 +28,14 @@ func (q *DeQueue) Size() int {
 	return q.size
 }
 
+func (q *DeQueue) IsFull() bool {
+	return q.size == q.capacity
+}
+
+func (q *DeQueue) IsEmpty() bool {
+	return q.size == 0
+}
+
 func (q *DeQueue) PushBack(elem interface{}) {
 	q.growIfFull()
 
@@ -167,7 +175,7 @@ func (q *DeQueue) resize() {
 	q.buffer = newBuf
 }
 
-func main(){
+func main() {
 	var q DeQueue
 	q.PushBack("foo")
 	q.PushBack("bar")

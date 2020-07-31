@@ -66,7 +66,7 @@ func LevelOrder(root *BinraryTreeNode) [][]int { // Data from each level is bein
 		}
 		result = append(result, level)
 	}
-	return res
+	return result
 }
 
 func main() {

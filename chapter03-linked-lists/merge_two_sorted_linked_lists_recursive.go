@@ -193,19 +193,19 @@ func (ll *LinkedList) length2() int {
 	return size
 }
 
-func mergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	if l1 == nil {
-		return l2
+func mergeTwoLists(head1 *ListNode, head2 *ListNode) *ListNode {
+	if head1 == nil {
+		return head2
 	}
-	if l2 == nil {
-		return l1
+	if head2 == nil {
+		return head1
 	}
-	if l1.data.(int) < l2.data.(int) {
-		l1.next = mergeTwoLists(l1.next, l2)
-		return l1
+	if head1.data < head2.data {
+		head1.next = mergeTwoLists(head1.next, head2)
+		return head1
 	}
-	l2.next = mergeTwoLists(l1, l2.next)
-	return l2
+	head2.next = mergeTwoLists(head1, head2.next)
+	return head2
 }
 
 func main() {

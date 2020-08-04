@@ -18,10 +18,10 @@ type CLLNode struct {
 	next *CLLNode
 }
 
-// CLL ... A linked list with len, start
+// CLL ... A linked list with len, head
 type CLL struct {
-	size  int
-	start *CLLNode
+	size int
+	head *CLLNode
 }
 
 // NewNode ... Creating a new node
@@ -35,28 +35,19 @@ func NewNode(data int) *CLLNode {
 // NewCircularLinkedList ... Creating an empty circular linked list
 func NewCircularLinkedList() CLL {
 	return CLL{
-		size:  0,
-		start: nil,
+		size: 0,
+		head: nil,
 	}
 }
-
-// CheckIfEmpty ... check if empty
-func (cll *CLL) CheckIfEmpty() bool {
-	if cll.size == 0 {
-		return true
-	}
-	return false
-}
-
 
 func (cll *CLL) Length() int {
-	current := cll.start
+	current := cll.head
 	count := 1
 	if current == nil {
 		return 0
 	}
 	current = current.next
-	for current != cll.start {
+	for current != cll.head {
 		current = current.next
 		count++
 	}
@@ -72,14 +63,13 @@ func (cll *CLL) CheckIfEmptyAndAdd(data int) bool {
 	// check if list is empty
 	if cll.size == 0 {
 		// insert first node in doubly linked list
-		cll.start = newNode
-		cll.start.next = newNode
+		cll.head = newNode
+		cll.head.next = newNode
 		cll.size++
 		return true
 	}
 	return false
 }
-
 
 // InsertBeginning ... insert in the beginning
 func (cll *CLL) InsertBeginning(data int) {
@@ -88,20 +78,20 @@ func (cll *CLL) InsertBeginning(data int) {
 			data: data,
 			next: nil,
 		}
-		head := cll.start
+		current := cll.head
 
-		// insert on head
-		newNode.next = head
+		// insert on current
+		newNode.next = current
 
 		// traverse this list until we find it's end
 		for {
-			if head.next == cll.start {
+			if current.next == cll.head {
 				break
 			}
-			head = head.next
+			current = current.next
 		}
-		head.next = newNode
-		cll.start = newNode
+		current.next = newNode
+		cll.head = newNode
 		cll.size++
 	}
 }
@@ -113,23 +103,23 @@ func (cll *CLL) InsertEnd(data int) {
 			data: data,
 			next: nil,
 		}
-		head := cll.start
+		current := cll.head
 		for {
-			if head.next == cll.start {
+			if current.next == cll.head {
 				break
 			}
-			head = head.next
+			current = current.next
 		}
-		head.next = newNode
-		newNode.next = cll.start
+		current.next = newNode
+		newNode.next = cll.head
 		cll.size++
 	}
 }
 
-// InsertLocation ... Insert in the list on a specific location
-func (cll *CLL) InsertLocation(data int, pos int) {
+// Insert ... Insert in the list on a specific location
+func (cll *CLL) Insert(data int, pos int) {
 	if !(cll.CheckIfEmptyAndAdd(data)) {
-		head := cll.start
+		current := cll.head
 		count := 1
 		if pos == 1 {
 			cll.InsertBeginning(data)
@@ -140,42 +130,50 @@ func (cll *CLL) InsertLocation(data int, pos int) {
 			next: nil,
 		}
 		for {
-			if head.next == nil && pos-1 > count {
+			if current.next == nil && pos-1 > count {
 				break
 			}
 			if count == pos-1 {
-				newNode.next = head.next
-				head.next = newNode
+				newNode.next = current.next
+				current.next = newNode
 				cll.size++
 				break
 			}
-			head = head.next
+			current = current.next
 			count++
 		}
 	}
 }
 
-// DeleteBeginning ... Delete from the start of the list
+// CheckIfEmpty ... check if empty
+func (cll *CLL) CheckIfEmpty() bool {
+	if cll.size == 0 {
+		return true
+	}
+	return false
+}
+
+// DeleteBeginning ... Delete from the head of the list
 func (cll *CLL) DeleteBeginning() int {
 	//check if list if empty
 	if !(cll.CheckIfEmpty()) {
-		head := cll.start
-		deletedElem := head.data
+		current := cll.head
+		deletedElem := current.data
 		if cll.size == 1 {
-			cll.start = nil
+			cll.head = nil
 			cll.size--
 			return deletedElem
 		}
-		prevStart := cll.start
-		cll.start = head.next
-		// traverse till end and update last node's next to updated start
+		prevStart := cll.head
+		cll.head = current.next
+		// traverse till end and update last node's next to updated head
 		for {
-			if head.next == prevStart {
+			if current.next == prevStart {
 				break
 			}
-			head = head.next
+			current = current.next
 		}
-		head.next = cll.start
+		current.next = cll.head
 		cll.size--
 		return deletedElem
 	}
@@ -185,8 +183,8 @@ func (cll *CLL) DeleteBeginning() int {
 // DeleteEnd ... Delete the last element from circular list
 func (cll *CLL) DeleteEnd() int {
 	if !(cll.CheckIfEmpty()) {
-		head := cll.start
-		deletedEle := head.data
+		current := cll.head
+		deletedEle := current.data
 		if cll.size == 1 {
 			// delete from beginning
 			deletedEle = cll.DeleteBeginning()
@@ -194,25 +192,25 @@ func (cll *CLL) DeleteEnd() int {
 		}
 		//traverse till end
 		for {
-			if head.next.next == cll.start {
-				deletedEle = head.next.data
+			if current.next.next == cll.head {
+				deletedEle = current.next.data
 				break
 			}
-			head = head.next
+			current = current.next
 		}
 		// update last element's next pointer
-		head.next = cll.start
+		current.next = cll.head
 		cll.size--
 		return deletedEle
 	}
 	return -1
 }
 
-// DeleteFromPosition ... delete an element from circular list
-func (cll *CLL) DeleteFromPosition(pos int) int {
+// Delete ... delete an element from circular list
+func (cll *CLL) Delete(pos int) int {
 	if !(cll.CheckIfEmpty()) {
-		head := cll.start
-		deletedEle := head.data
+		current := cll.head
+		deletedEle := current.data
 		if cll.size == 1 {
 			// delete from beginning
 			deletedEle = cll.DeleteBeginning()
@@ -228,12 +226,12 @@ func (cll *CLL) DeleteFromPosition(pos int) int {
 		count := 1
 		for {
 			if count == pos-1 {
-				deletedEle = head.next.data
+				deletedEle = current.next.data
 				break
 			}
-			head = head.next
+			current = current.next
 		}
-		head.next = head.next.next
+		current.next = current.next.next
 		cll.size--
 		return deletedEle
 	}
@@ -242,11 +240,11 @@ func (cll *CLL) DeleteFromPosition(pos int) int {
 
 // Display ... Print Circular list
 func (cll *CLL) Display() {
-	head := cll.start
+	current := cll.head
 	for i := 0; i < cll.size; i++ {
-		fmt.Print(head.data)
+		fmt.Print(current.data)
 		fmt.Print("-->")
-		head = head.next
+		current = current.next
 	}
 	fmt.Println()
 }

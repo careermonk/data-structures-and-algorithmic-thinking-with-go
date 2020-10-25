@@ -73,11 +73,5 @@ func main() {
 		}
 	}
 
-	maxConnects := 0
-	for r := 0; r < M; r++ {
-		for c := 0; c < N; c++ {
-			maxConnects = max(maxConnects, findConnects(matrix, M, N, r, c))
-		}
-	}
 	fmt.Println(findMaxConnects(matrix, M, N))
 }

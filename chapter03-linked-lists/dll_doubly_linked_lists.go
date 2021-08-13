@@ -97,23 +97,18 @@ func (dll *DLL) InsertEnd(data int) {
 		next: nil,
 	}
 	if !(dll.CheckIfEmptyAndAdd(newNode)) {
-		head := dll.head
-		for i := 0; i < dll.size; i++ {
-			if head.next == nil {
-				// update newnode links - prev and next
-				newNode.prev = head
-				newNode.next = nil
+		tail := dll.tail
 
-				//update head node
-				head.next = newNode
+		// update newnode links - prev and next
+		newNode.prev = tail
+		newNode.next = nil
 
-				// update dll end and size
-				dll.tail = newNode
-				dll.size++
-				break
-			}
-			head = head.next
-		}
+		// update head node
+		tail.next = newNode
+
+		// update dll end and length
+		dll.tail = newNode
+		dll.size++
 	}
 	return
 }
@@ -233,5 +228,8 @@ func main() {
 
 	dll.InsertBeginning(19) // Update dll
 
+	dll.Display()
+
+	dll.InsertEnd(119) // Update dll
 	dll.Display()
 }

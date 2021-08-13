@@ -146,16 +146,14 @@ func (dll *DLL) InsertMiddle(data int, loc int) {
 func (dll *DLL) DeleteFirst() int {
 	if !(dll.CheckIfEmpty()) {
 		head := dll.head
-		if head.prev == nil {
-			deletedNode := head.data
+		deletedNode := head.data
 
-			// update doubly linked list
-			dll.head = head.next
-			dll.head.prev = nil
-			dll.size--
+		// update doubly linked list
+		dll.head = head.next
+		dll.head.prev = nil
+		dll.size--
 
-			return deletedNode
-		}
+		return deletedNode
 	}
 	return -1
 }
@@ -164,19 +162,15 @@ func (dll *DLL) DeleteFirst() int {
 func (dll *DLL) DeleteLast() int {
 	if !(dll.CheckIfEmpty()) {
 		// delete from last
-		head := dll.head
-		for {
-			if head.next == nil {
-				break
-			}
-			head = head.next
-		}
+		tail := dll.tail
+		deletedNode := tail.data
 
 		// update doubly linked list
-		dll.tail = head.prev
+		dll.tail = tail.prev
 		dll.tail.next = nil
 		dll.size--
-		return head.data
+
+		return deletedNode
 	}
 	return -1
 }
@@ -231,5 +225,9 @@ func main() {
 	dll.Display()
 
 	dll.InsertEnd(119) // Update dll
+	dll.Display()
+
+	dll.DeleteFirst() // Update dll
+	dll.DeleteLast()  // Update dll
 	dll.Display()
 }

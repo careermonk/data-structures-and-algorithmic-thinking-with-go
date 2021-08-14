@@ -97,23 +97,18 @@ func (dll *DLL) InsertEnd(data int) {
 		next: nil,
 	}
 	if !(dll.CheckIfEmptyAndAdd(newNode)) {
-		head := dll.head
-		for i := 0; i < dll.size; i++ {
-			if head.next == nil {
-				// update newnode links - prev and next
-				newNode.prev = head
-				newNode.next = nil
+		tail := dll.tail
 
-				//update head node
-				head.next = newNode
+		// update newnode links - prev and next
+		newNode.prev = tail
+		newNode.next = nil
 
-				// update dll end and size
-				dll.tail = newNode
-				dll.size++
-				break
-			}
-			head = head.next
-		}
+		// update head node
+		tail.next = newNode
+
+		// update dll end and length
+		dll.tail = newNode
+		dll.size++
 	}
 	return
 }
@@ -151,16 +146,19 @@ func (dll *DLL) InsertMiddle(data int, loc int) {
 func (dll *DLL) DeleteFirst() int {
 	if !(dll.CheckIfEmpty()) {
 		head := dll.head
-		if head.prev == nil {
-			deletedNode := head.data
+		deletedNode := head.data
 
+		if dll.head != dll.tail {
 			// update doubly linked list
 			dll.head = head.next
 			dll.head.prev = nil
-			dll.size--
-
-			return deletedNode
+		} else {
+			dll.head = nil
+			dll.tail = nil
 		}
+		dll.size--
+
+		return deletedNode
 	}
 	return -1
 }
@@ -168,20 +166,20 @@ func (dll *DLL) DeleteFirst() int {
 // DeleteLast ... deletes last element from doubly linked list
 func (dll *DLL) DeleteLast() int {
 	if !(dll.CheckIfEmpty()) {
-		// delete from last
-		head := dll.head
-		for {
-			if head.next == nil {
-				break
-			}
-			head = head.next
-		}
+		tail := dll.tail
+		deletedNode := tail.data
 
-		// update doubly linked list
-		dll.tail = head.prev
-		dll.tail.next = nil
+		if dll.head != dll.tail {
+			// update doubly linked list
+			dll.tail = tail.prev
+			dll.tail.next = nil
+		} else {
+			dll.head = nil
+			dll.tail = nil
+		}
 		dll.size--
-		return head.data
+
+		return deletedNode
 	}
 	return -1
 }
@@ -233,5 +231,12 @@ func main() {
 
 	dll.InsertBeginning(19) // Update dll
 
+	dll.Display()
+
+	dll.InsertEnd(119) // Update dll
+	dll.Display()
+
+	dll.DeleteFirst() // Update dll
+	dll.DeleteLast()  // Update dll
 	dll.Display()
 }

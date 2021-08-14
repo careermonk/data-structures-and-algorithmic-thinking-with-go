@@ -148,9 +148,14 @@ func (dll *DLL) DeleteFirst() int {
 		head := dll.head
 		deletedNode := head.data
 
-		// update doubly linked list
-		dll.head = head.next
-		dll.head.prev = nil
+		if dll.head != dll.tail {
+			// update doubly linked list
+			dll.head = head.next
+			dll.head.prev = nil
+		} else {
+			dll.head = nil
+			dll.tail = nil
+		}
 		dll.size--
 
 		return deletedNode
@@ -161,13 +166,17 @@ func (dll *DLL) DeleteFirst() int {
 // DeleteLast ... deletes last element from doubly linked list
 func (dll *DLL) DeleteLast() int {
 	if !(dll.CheckIfEmpty()) {
-		// delete from last
 		tail := dll.tail
 		deletedNode := tail.data
 
-		// update doubly linked list
-		dll.tail = tail.prev
-		dll.tail.next = nil
+		if dll.head != dll.tail {
+			// update doubly linked list
+			dll.tail = tail.prev
+			dll.tail.next = nil
+		} else {
+			dll.head = nil
+			dll.tail = nil
+		}
 		dll.size--
 
 		return deletedNode
